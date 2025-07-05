@@ -1,0 +1,23 @@
+{
+  "name": "bob-corn-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/widzthedvloper/bob-corn-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/widzthedvloper/bob-corn-api/issues"
+  },
+  "homepage": "https://github.com/widzthedvloper/bob-corn-api#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
