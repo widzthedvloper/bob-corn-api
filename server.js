@@ -1,4 +1,7 @@
 const express = require('express');
+require('dotenv').config();
+
+
 const cors = require('cors');
 const {buyersRouter} = require('./src/routes/buyers.routes')
 const {cropTypeRouter} = require('./src/routes/croptype-routes')
