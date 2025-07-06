@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 require('dotenv').config();
 
@@ -27,6 +29,12 @@ app.use('/crop-types', cropTypeRouter)
 app.use('/corn-products', cornProductsRouter)
 app.use('/sales', saleRouter)
 
-app.listen(PORT, () => {
+
+const server = https.createServer({
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+}, app);
+
+server.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
 })
