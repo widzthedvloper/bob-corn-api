@@ -9,6 +9,10 @@ const buyersTable = db.define('Buyers', {
     },
     email:{type: DataTypes.TEXT},
     name: { type: DataTypes.TEXT},
+    role: {
+        type: DataTypes.TEXT,
+        defaultValue: 'user',
+    },
 },{
     tableName: 'buyers',
     timestamps: false

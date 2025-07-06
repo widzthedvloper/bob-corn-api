@@ -19,6 +19,8 @@ app.get('/', (req, res)=>{
 
 app.use('/buyers', buyersRouter)
 app.use('/crop-types', cropTypeRouter)
+app.use('/corn-products', (req, res)=>{})
+app.use('/sales', (req, res)=>{})
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
