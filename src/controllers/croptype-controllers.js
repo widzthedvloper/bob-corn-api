@@ -25,14 +25,14 @@ async function getCropType(req, res){
 async function updateCropType(req, res){
     try {
         const id = req?.params?.cropTypeId
-        const {name, email} = req?.body
+        const {name, description} = req?.body
 
         if(name && email && id){
             const crop = await cropTypeTable.findByPk(id)
             if(crop){
                 await crop.update({
                     name,
-                    email
+                    description
                 })
                 res.json(crop)
             }else{
@@ -46,12 +46,12 @@ async function updateCropType(req, res){
 
 async function createCropType(req, res) {
     try {
-        const {name, email} = req?.body
+        const {name, description} = req?.body
 
         if(name && email){
             const crop = await cropTypeTable.create({
                 name,
-                email
+                description
             })
             
             res.status(201).json(crop)
