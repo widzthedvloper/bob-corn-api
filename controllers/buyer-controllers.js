@@ -17,7 +17,44 @@ async function getBuyer(req, res){
     }
 }
 
+async function updateBuyer(req, res){
+    try {
+        const id = req?.params?.buyerId
+        const {name, email} = req?.body
+
+        if(name && email && id){
+            const buyer = await buyersTable.findByPk(id)
+            await buyer.update({
+                name,
+                email
+            })
+            res.json(buyer)
+        }
+    } catch (error) {
+        res.status(404).json({error: 'Couldn\'t update Buyer'})
+    }
+}
+
+async function createBuyer(req, res) {
+    try {
+        const {name, email} = req?.body
+
+        if(name && email){
+            const buyer = await buyersTable.create({
+                name,
+                email
+            })
+            
+            res.status(201).json(buyer)
+        }
+    } catch (error) {
+        res.status(404).json({error: 'Couldn\'t update Buyer'})
+    }
+}
+
 module.exports = {
     getBuyers,
-    getBuyer
+    getBuyer,
+    updateBuyer,
+    createBuyer,
 }
