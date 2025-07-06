@@ -10,7 +10,7 @@ const {saleRouter} = require('./src/routes/sales.routes')
 
 const app = express();
 
-const PORT = 8080;
+const PORT = process.env.SERVER_PORT;
 
 app.use(express.json())
 
