@@ -9,8 +9,13 @@ async function getCropType(req, res){
     try {
         const cropTypeId = parseInt(req?.params?.cropTypeId)
         if(cropTypeId){
+            console.log('runnn')
             const cropType = await cropTypeTable.findByPk(cropTypeId)
-            res.json(cropType)
+            if(cropType){
+                res.json(cropType)
+            } else{
+                res.status(404).json({error: 'Crop Type not found'})
+            }
         }
     } catch (error) {
         res.status(404).json({error: 'Crop Type not found'})
@@ -24,11 +29,15 @@ async function updateCropType(req, res){
 
         if(name && email && id){
             const crop = await cropTypeTable.findByPk(id)
-            await crop.update({
-                name,
-                email
-            })
-            res.json(crop)
+            if(crop){
+                await crop.update({
+                    name,
+                    email
+                })
+                res.json(crop)
+            }else{
+                res.status(404).json({error: 'Couldn\'t update Crop Type'})
+            }
         }
     } catch (error) {
         res.status(404).json({error: 'Couldn\'t update Crop Type'})

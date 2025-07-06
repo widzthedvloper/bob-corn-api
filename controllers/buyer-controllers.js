@@ -10,7 +10,11 @@ async function getBuyer(req, res){
         const buyerId = parseInt(req?.params?.buyerId)
         if(buyerId){
             const buyer = await buyersTable.findByPk(buyerId)
-            res.json(buyer)
+            if(buyer){
+                res.json(buyer)
+            }else{
+                res.status(404).json({error: 'Buyer not found'})
+            }
         }
     } catch (error) {
         res.status(404).json({error: 'Buyer not found'})
@@ -24,11 +28,15 @@ async function updateBuyer(req, res){
 
         if(name && email && id){
             const buyer = await buyersTable.findByPk(id)
-            await buyer.update({
-                name,
-                email
-            })
-            res.json(buyer)
+            if(buyer){
+                await buyer.update({
+                    name,
+                    email
+                })
+                res.json(buyer)
+            }else{
+                res.status(404).json({error: 'Couldn\'t update Buyer'})
+            }
         }
     } catch (error) {
         res.status(404).json({error: 'Couldn\'t update Buyer'})
