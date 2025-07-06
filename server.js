@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const {buyersRouter} = require('./routes/buyers.routes')
+const {buyersRouter} = require('./src/routes/buyers.routes')
+const {cropTypeRouter} = require('./src/routes/croptype-routes')
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.get('/', (req, res)=>{
 })
 
 app.use('/buyers', buyersRouter)
+app.use('/crop-types', cropTypeRouter)
+app.use('/corn-products', (req, res)=>{})
+app.use('/sales', (req, res)=>{})
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
