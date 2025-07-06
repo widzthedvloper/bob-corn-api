@@ -13,17 +13,30 @@ const {cropTypeRouter} = require('./src/routes/croptype-routes')
 const {cornProductsRouter} = require('./src/routes/cornProducts.routes')
 const {saleRouter} = require('./src/routes/sales.routes')
 const {oAuthRouter} = require('./src/login/routes/oAuth.routes');
+const { error } = require('console');
 
 const app = express();
 
 app.use(helmet());
 
+function checkLoggedIn(req, res, next){
+    const isLoggedIn = req.isAuthenticated() && req.user;
+
+    if(!isLoggedIn){
+        return res.status(404).json({error: 'Please log in and try again!'})
+    }else{
+        next()
+    }
+
+}
+
 passport.serializeUser((user, done)=>{
-    done(null, user);
+    const {sub} = user?._json
+    done(null, sub);
 })
 
-passport.deserializeUser((obj, done)=>{
-    done(null, obj);
+passport.deserializeUser((sub, done)=>{
+    done(null, sub);
 })
 
 app.use(cookieSession({
@@ -56,8 +69,10 @@ app.use(cors({
     origin: 'http://localhost:3000',
 }))
 
+
 app.use('/oauth', oAuthRouter)
 
+app.use(checkLoggedIn)
 app.use('/buyers', buyersRouter)
 app.use('/crop-types', cropTypeRouter)
 app.use('/corn-products', cornProductsRouter)
