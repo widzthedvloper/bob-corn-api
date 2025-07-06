@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const {buyersRouter} = require('./routes/buyers.routes')
-const {cropTypeRouter} = require('./routes/croptype-routes')
+const {buyersRouter} = require('./src/routes/buyers.routes')
+const {cropTypeRouter} = require('./src/routes/croptype-routes')
 
 const app = express();
 
