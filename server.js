@@ -31,8 +31,8 @@ function checkLoggedIn(req, res, next){
 }
 
 passport.serializeUser((user, done)=>{
-    const {sub} = user?._json
-    done(null, sub);
+    const {sub, emai} = user?._json
+    done(null, {sub, emai});
 })
 
 passport.deserializeUser((sub, done)=>{
