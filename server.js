@@ -3,6 +3,8 @@ const fs = require('fs');
 const express = require('express');
 require('dotenv').config();
 
+const helmet = require('helmet');
+
 
 const cors = require('cors');
 const {buyersRouter} = require('./src/routes/buyers.routes')
@@ -11,6 +13,8 @@ const {cornProductsRouter} = require('./src/routes/cornProducts.routes')
 const {saleRouter} = require('./src/routes/sales.routes')
 
 const app = express();
+
+app.use(helmet());
 
 const PORT = process.env.SERVER_PORT;
 
