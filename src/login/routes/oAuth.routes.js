@@ -31,6 +31,13 @@ oAuthRouter.get('/google/callback', passport.authenticate('google', {
 }), (req, res)=>{console.log('From google...')});
 oAuthRouter.get('/google/failure', (req, res)=> res.status(404).json({error: 'Failed to log in!'}));
 oAuthRouter.get('/google/success', (req, res)=> res.status(200).json({'name': 'Widzmarc'}));
-// oAuthRouter.post('/logout')
+oAuthRouter.get('/logout', (req, res)=>{
+    req.logout((err)=>{
+        if(err){
+            return next(err)
+        }
+        res.status(200).json({message: 'Logged out!'})
+    });
+})
 
 module.exports = {oAuthRouter};
