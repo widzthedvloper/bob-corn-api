@@ -23,10 +23,11 @@ oAuthRouter = express.Router()
 oAuthRouter.get('/google', passport.authenticate('google', {
     scope: ['email']
 }));
+
 oAuthRouter.get('/google/callback', passport.authenticate('google', {
     failureRedirect: 'failure',
     successRedirect: 'success',
-    session: false
+    session: true,
 }), (req, res)=>{console.log('From google...')});
 oAuthRouter.get('/google/failure', (req, res)=> res.status(404).json({error: 'Failed to log in!'}));
 oAuthRouter.get('/google/success', (req, res)=> res.status(200).json({'name': 'Widzmarc'}));
