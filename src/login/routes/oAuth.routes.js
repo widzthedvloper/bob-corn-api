@@ -40,5 +40,10 @@ oAuthRouter.get('/logout', (req, res)=>{
         res.status(200).json({message: 'Logged out!'})
     });
 })
+oAuthRouter.get('/is-loggedin', (req, res) => {
+    const isLoggedIn = req.isAuthenticated() && req.user;
+
+    res.status(200).json({'is_loggedin': isLoggedIn})
+})
 
 module.exports = {oAuthRouter};
