@@ -51,9 +51,81 @@ COOKIE_KEY_2=
 REDIS_URL=
 
 
-## Contributing
+## PG data you can use to populate your pg
 
-This project is for educational purposes.
+
+> create table CropTypes (
+	id serial PRIMARY KEY,
+	name VARCHAR(50) not null,
+	description TEXT
+)
+
+> create table CornProduts (
+	id serial primary key,
+	crop_type_id INT,
+	harvest_date DATE,
+	quantity INT,
+	foreign key (crop_type_id) references CropTypes(id)
+)
+
+> create table Buyers (
+	id serial primary key,
+	email text,
+	name text
+)
+
+> create table Sales (
+	id serial  primary key,
+	corn_product_id INT,
+	sale_date Date,
+	buyer_id INT,
+	quantity_sold INT,
+	foreign key (buyer_id) references Buyers(id)
+)
+
+ # populate database
+
+> Insert crop types
+INSERT INTO CropTypes (name, description) VALUES
+('Sweet Corn', 'Tender and sugary variety commonly eaten as a vegetable.'),
+('Field Corn', 'Used primarily for livestock feed and industrial products.'),
+('Popcorn', 'A special type of corn that pops when heated.');
+
+> Insert corn products
+INSERT INTO CornProduts (crop_type_id, harvest_date, quantity) VALUES
+(1, '2024-08-15', 500),
+(1, '2024-09-01', 300),
+(2, '2024-07-20', 1000),
+(2, '2024-07-25', 750),
+(3, '2024-06-30', 400),
+(3, '2024-07-10', 350);
+
+> Insert buyers
+INSERT INTO Buyers (email, name) VALUES
+('john.doe@example.com', 'John Doe'),
+('jane.smith@example.com', 'Jane Smith'),
+('michael.jordan@example.com', 'Michael Jordan'),
+('sara.connor@example.com', 'Sara Connor'),
+('tony.stark@example.com', 'Tony Stark');
+
+> Insert sales
+INSERT INTO Sales (corn_product_id, sale_date, buyer_id, quantity_sold) VALUES
+(1, '2024-09-10', 1, 200),
+(2, '2024-09-12', 2, 150),
+(3, '2024-08-05', 3, 500),
+(5, '2024-07-01', 4, 300),
+(6, '2024-07-15', 5, 250);
+
+> select * from CornProducts;
+> select * from Buyers;
+> select * from CropTypes;
+> select * from Sales;
+
+> SELECT "id", "email", "name" FROM Buyers AS "Buyers";
+> ALTER TABLE buyers ADD COLUMN role TEXT;
+> ALTER TABLE cornproduts RENAME TO cornProduct;
+> ALTER TABLE cornproduct RENAME TO cornProducts;
+
 
 👤 **Widzmarc Jean Nesly Phelle**
 
