@@ -31,6 +31,14 @@ function checkLoggedIn(req, res, next){
 
 }
 
+app.use(cookieSession({
+    name: '_bob_corn_session',
+    maxAge: 24 * 60 * 60 * 60,
+    keys: [process.env.COOKIE_KEY_1, process.env.COOKIE_KEY_2],
+    secure: true,
+    sameSite: 'none',
+}))
+
 passport.serializeUser((user, done)=>{
     const {sub, email} = user?._json
     done(null, {sub, email});
@@ -39,12 +47,6 @@ passport.serializeUser((user, done)=>{
 passport.deserializeUser((sub, done)=>{
     done(null, sub);
 })
-
-app.use(cookieSession({
-    name: '_bob_corn_session',
-    maxAge: 24 * 60 * 60 * 60,
-    keys: [process.env.COOKIE_KEY_1, process.env.COOKIE_KEY_2],
-}))
 
 app.use((req, res, next)=>{
     if(req.session && !req.session.regenerate){
@@ -87,8 +89,8 @@ initializeLimiter().then((rateLimiter) => {
 })
 
 const server = https.createServer({
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
+    key: fs.readFileSync('localhost-key.pem'),
+    cert: fs.readFileSync('localhost.pem')
 }, app);
 
 server.listen(PORT, () => {
