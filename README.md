@@ -51,7 +51,7 @@ COOKIE_KEY_2=
 REDIS_URL=
 
 
-## PG data you can use to populate your pg
+## Creat DataBase
 
 
 > create table CropTypes (
