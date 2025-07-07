@@ -1,18 +1,18 @@
 const db = require('./db_connection');
 const {DataTypes} = require('sequelize');
 
-const buyersTable = db.define('Buyers', {
+const cropTypeTable = db.define('CropTypes', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    email:{type: DataTypes.TEXT},
     name: { type: DataTypes.TEXT},
+    description:{type: DataTypes.TEXT},
 },{
-    tableName: 'buyers',
+    tableName: 'croptypes',
     timestamps: false
 })
 
 
-module.exports = buyersTable;
+module.exports = cropTypeTable;
