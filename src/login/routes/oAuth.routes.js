@@ -30,8 +30,8 @@ oAuthRouter.get('/google/callback', passport.authenticate('google', {
     session: true,
 }), (req, res)=>{console.log('From google...')});
 
-oAuthRouter.get('/google/failure', (req, res)=> res.status(404).json({error: 'Failed to log in!'}));
-oAuthRouter.get('/google/success', (req, res)=> res.status(200).json({'name': 'Widzmarc'}));
+oAuthRouter.get('/google/failure', (req, res)=> res.redirect('http://localhost:5173/login'));
+oAuthRouter.get('/google/success', (req, res)=> res.redirect('http://localhost:5173/'));
 oAuthRouter.get('/logout', (req, res)=>{
     req.logout((err)=>{
         if(err){
