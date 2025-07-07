@@ -1,7 +1,14 @@
-const cornProductsTable = require('../models/cornProducts.models');
+const {cornProductsTable} = require('../models');
+const {cropTypeTable} = require('../models')
 
 async function getProducts(req, res) {
-    const products = await cornProductsTable.findAll();
+    const products = await cornProductsTable.findAll({
+        include: {
+            model: cropTypeTable,
+            as: 'cropType',
+            attributes: ['id', 'name']
+        }
+    });
     res.json(products)
 }
 
