@@ -3,6 +3,8 @@ const fs = require('fs');
 const express = require('express');
 require('dotenv').config();
 
+const {initializeLimiter} = require('./src/utils/rate-limit')
+
 const helmet = require('helmet');
 const passport = require('passport');
 const cookieSession = require('cookie-session')
@@ -13,7 +15,6 @@ const {cropTypeRouter} = require('./src/routes/croptype-routes')
 const {cornProductsRouter} = require('./src/routes/cornProducts.routes')
 const {saleRouter} = require('./src/routes/sales.routes')
 const {oAuthRouter} = require('./src/login/routes/oAuth.routes');
-const { error } = require('console');
 
 const app = express();
 
@@ -31,8 +32,8 @@ function checkLoggedIn(req, res, next){
 }
 
 passport.serializeUser((user, done)=>{
-    const {sub, emai} = user?._json
-    done(null, {sub, emai});
+    const {sub, email} = user?._json
+    done(null, {sub, email});
 })
 
 passport.deserializeUser((sub, done)=>{
@@ -78,6 +79,11 @@ app.use('/crop-types', cropTypeRouter)
 app.use('/corn-products', cornProductsRouter)
 app.use('/sales', saleRouter)
 
+initializeLimiter().then((rateLimiter) => {
+    app.use('/buy', rateLimiter, (req, res) => {
+    res.status(200).json({ message: 'Thanks for buying' });
+  })
+})
 
 const server = https.createServer({
     key: fs.readFileSync('key.pem'),
