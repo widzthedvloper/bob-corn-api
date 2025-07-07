@@ -29,26 +29,26 @@ This is an Express api to buy corn!
 ## .env file
 
 ### database
-HOST=
-DB_NAME=
-DB_USERNAME=
-DB_PASSWORD=
-DB_ENGINE=
-DB_PORT=
+- HOST=
+- DB_NAME=
+- DB_USERNAME=
+- DB_PASSWORD=
+- DB_ENGINE=
+- DB_PORT=
 
 ### server
-SERVER_PORT=
+- SERVER_PORT=
 
 ### oAuth gogle
-CLIENT_ID=
-CLIENT_SECRET=
+- CLIENT_ID=
+- CLIENT_SECRET=
 
 ### cookie key
-COOKIE_KEY_1=
-COOKIE_KEY_2=
+- COOKIE_KEY_1=
+- COOKIE_KEY_2=
 
 ### redis url
-REDIS_URL=
+- REDIS_URL=
 
 
 ## Creat DataBase
